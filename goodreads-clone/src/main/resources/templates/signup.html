@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fascinate&family=Goldman:wght@400;700&family=Michroma&family=Orbitron:wght@400;600;800;900&family=Zen+Dots&display=swap">
+    <style>
+        body {
+            font-family: 'Michroma', sans-serif;
+            background: radial-gradient(circle, #d198b6 0%, #f2d3e3 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            height: 90vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            position: relative; 
+        }
+
+        h1 {
+            color: #ff66cc;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #ff99cc;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ff99cc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            background-color: #fff;
+        }
+
+        button {
+            padding: 12px 24px;
+            background-color: #ff66cc; /* hot pink */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 200px;
+            font-size: 1rem;
+            margin-top: 20px;
+            border: 2px solid #ff99cc; /* light pink */
+            background-image: linear-gradient(45deg, #ff99cc, #ff66cc); /* gradient */
+            box-shadow: 0 0 10px rgba(255, 102, 204, 0.5); /* shadow */
+        }
+
+        button:hover {
+            background-color: #ff99cc; /* light pink */
+        }
+
+        .close-button {
+          position: absolute;
+          top: 15px;
+          right: 20px;
+          width: 30px;
+          height: 25px;
+          background-color: #FEAAFF;
+          border: 2px solid black;
+          cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="close-button" th:onclick="|window.location.href='/api/goodreads/'|">X</span>
+        <h1>Sign Up</h1>
+        <form action="#" th:action="@{/api/goodreads/register}" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            
+            <button type="submit">Sign Up</button>
+        </form>
+        <p class="login-link">Already have an account? <a th:href="@{/api/goodreads/login}">Login</a></p>
+    </div>
+</body>
+</html>

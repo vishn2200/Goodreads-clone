@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+</head>
+<body>
+    <form action="#" th:action="@{/api/goodreads/addBookSuccess/{readingListId}(readingListId=${readingListId})}" method="post">
+        <input type="hidden" name="readingListId" th:value="${readingListId}" />
+        <label for="book_id">Book ID:</label><br>
+        <input type="text" id="book_id" name="book_id"><br>
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title"><br>
+        <label for="status">Status:</label><br>
+        <input type="text" id="status" name="status"><br>
+        <label for="rating">Rating:</label><br>
+        <input type="text" id="rating" name="rating"><br><br>
+        <button type="submit">Add Book</button>
+    </form>
+</body>
+</html>
+

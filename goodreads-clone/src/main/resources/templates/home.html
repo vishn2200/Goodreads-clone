@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Goodreads Clone</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2d3e3; /* light pink */
+            color: #fff; /* white */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: rgb(64, 60, 60);
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn {
+            background-color: #ff99cc; /* light pink */
+            color: #fff; /* white */
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin: 0 10px;
+        }
+
+        .btn:hover {
+            background-color: #ff6699; /* pink */
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff; /* white */
+        }
+
+        a:hover {
+            color: #ff99cc; /* light pink */
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Welcome to Goodreads Clone</h1>
+        <p>Discover and share books with friends!</p>
+        <ul>
+            <li><a class="btn" th:href="@{/api/goodreads/signup}">Signup</a></li>
+            <li><a class="btn" th:href="@{/api/goodreads/login}">Login</a></li>
+            <li><a class="btn" th:href="@{/api/goodreads/dashboard}">Continue as Guest</a></li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Book Clubs</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fascinate&family=Goldman:wght@400;700&family=Michroma&family=Orbitron:wght@400;600;800;900&family=Zen+Dots&display=swap">
+    <style>
+        body {
+            font-family: 'Michroma', sans-serif;
+            background-color: #f2d3e3;
+            margin: 0;
+            padding: 0;
+        }
+        .top-bar {
+            background-color: #c4739e;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .top-bar h1 {
+            margin: 0;
+        }
+        .content {
+            padding: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #c4739e;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #985b77;
+        }
+        .top-right {
+            display: flex;
+            align-items: center;
+        }
+        .top-right button {
+            padding:20px;
+            font-weight: bolder;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <h1>Book Clubs</h1>
+        <div class="top-right">
+            <form action="/api/goodreads/createBookClub" method="get">
+                <button type="submit">+</button>
+            </form>
+            <form action="/api/goodreads/joinBookClub" method="get">
+                <button type="submit">Join Book Club</button>
+            </form>
+        </div>
+    </div>
+    <div class="content">
+        <ul>
+            <!-- Loop through the list of book clubs and display them -->
+            <th:block th:each="bookClub : ${bookClubs}">
+                <li th:text="${bookClub.name}"></li>
+                <!-- Button to join a specific book club -->
+                <form action="/api/goodreads/joinBookClub" method="post">
+                    <input type="hidden" name="clubId" th:value="${bookClub.id}" />
+                    <button type="submit">Join</button>
+                </form>
+            </th:block>
+        </ul>
+    </div>
+</body>
+</html>

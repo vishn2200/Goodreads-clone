@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fascinate&family=Goldman:wght@400;700&family=Michroma&family=Orbitron:wght@400;600;800;900&family=Zen+Dots&display=swap">
+    <style>
+        body {
+            font-family: 'Michroma';
+            background-color: #f2d3e3;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .sidebar-container {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 220px; /* Adjusted for the width of the sidebar */
+            background-color: #bea0b1; /* Pink background */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px; /* Soft corners */
+            padding: 20px;
+            z-index: 100; /* Ensure it's above other content */
+            transition: transform 0.3s ease; /* Added transition for smooth animation */
+            transform: translateX(-100%); /* Initially hidden */
+        }
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Adjusted to create space between links */
+        }
+        .sidebar a {
+            text-decoration: none;
+            color: #fff; /* White text */
+            padding: 10px;
+            border-radius: 5px; /* Soft corners for links */
+            transition: background-color 0.3s ease;
+            display: block;
+            background-color: #b2658f; /* Bold pink background */
+        }
+        .sidebar a:hover {
+            background-color: #96878e; /* Lighter pink background on hover */
+        }
+        .container {
+            text-align: center;
+            margin-left: 150px; /* Adjusted to leave space for sidebar */
+        }
+        h2 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            width: 70%;
+        }
+        .input-group-append .btn {
+            border-radius: 0 5px 5px 0;
+        }
+        .btn-primary {
+            background-color: #c4739e;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none; /* Remove underline */
+        }
+        .btn-primary:hover {
+            background-color: #985b77;
+        }
+        #toggle-sidebar-checkbox {
+            display: none; /* Hide the checkbox */
+        }
+        #toggle-sidebar-label {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            z-index: 200; /* Ensure it's above other content */
+        }
+        #toggle-sidebar-label:before {
+            content: "☰"; /* Triple bar icon */
+            font-size: 24px;
+        }
+        #toggle-sidebar-checkbox:checked ~ .sidebar-container {
+            transform: translateX(0); /* Show the sidebar when checkbox is checked */
+        }
+    </style>
+    
+</head>
+<body>
+    <!-- Toggle Sidebar Label -->
+    <input type="checkbox" id="toggle-sidebar-checkbox">
+    <label for="toggle-sidebar-checkbox" id="toggle-sidebar-label"></label>
+
+    <!-- Sidebar -->
+    <div class="sidebar-container">
+        <div class="sidebar">
+            <p style="padding-bottom: 10px; border-bottom: 3px solid #fff;"><b>Dashboard</b></p>
+            <!-- <a th:href="@{/api/goodreads/joinBookClub}">Join a Book Club</a> -->
+            <!-- <a th:href="@{/api/goodreads/createBookClub}">Create a Book Club</a> -->
+            <a th:href="@{/api/goodreads/viewBookClub}">View Book Clubs</a>
+            <a th:href="@{/api/goodreads/reading-list}">Reading List</a>
+            <a th:href="@{/api/goodreads/}">Log Out</a>
+            <a th:href="@{/api/goodreads/deleteAccount}">Delete Account</a>
+        </div>
+    </div>    
+    
+    <!-- Main content -->
+    <div class="container">
+        <h2>Welcome to Your Dashboard</h2>
+        
+        <form action="#" th:action="@{/api/goodreads/search}" method="get" class="input-group">
+            <input type="text" class="form-control" placeholder="Enter author name or book name" name="query">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
+        
+        <!-- Other dashboard content goes here -->
+    </div>
+</body>
+</html>
