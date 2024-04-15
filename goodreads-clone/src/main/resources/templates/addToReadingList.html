@@ -1,23 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Book</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fascinate&family=Goldman:wght@400;700&family=Michroma&family=Orbitron:wght@400;600;800;900&family=Zen+Dots&display=swap">
+    <style>
+        body {
+            font-family: 'Michroma', sans-serif;
+            background: radial-gradient(circle, #d198b6 0%, #f2d3e3 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 80px;
+            height: 70vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+        }
+
+        h1 {
+            color: #ff66cc;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #ff99cc;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ff99cc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            background-color: #fff;
+        }
+
+        button {
+            padding: 12px 24px;
+            background-color: #ff66cc;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 200px;
+            font-size: 1rem;
+            margin-top: 20px;
+            border: 2px solid #ff99cc;
+            background-image: linear-gradient(45deg, #ff99cc, #ff66cc);
+            box-shadow: 0 0 10px rgba(255, 102, 204, 0.5);
+        }
+
+        button:hover {
+            background-color: #ff99cc;
+        }
+
+        a {
+            color: #ff66cc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        a:hover {
+            color: #ff99cc;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            background-color: #FEAAFF;
+            border: 2px solid black;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
-    <form action="#" th:action="@{/api/goodreads/addBookSuccess/{readingListId}(readingListId=${readingListId})}" method="post">
-        <input type="hidden" name="readingListId" th:value="${readingListId}" />
-        <label for="book_id">Book ID:</label><br>
-        <input type="text" id="book_id" name="book_id"><br>
-        <label for="title">Title:</label><br>
-        <input type="text" id="title" name="title"><br>
-        <label for="status">Status:</label><br>
-        <input type="text" id="status" name="status"><br>
-        <label for="rating">Rating:</label><br>
-        <input type="text" id="rating" name="rating"><br><br>
-        <button type="submit">Add Book</button>
-    </form>
+    <div class="container">
+        <span class="close-button" th:onclick="|window.location.href='/api/goodreads/reading-list'|">X</span>
+        <h1>Add Book</h1>
+        <form action="#" th:action="@{/api/goodreads/addBookSuccess/{readingListId}(readingListId=${readingListId})}" method="post">
+            <input type="hidden" name="readingListId" th:value="${readingListId}" />
+            <label for="book_id">Book ID:</label>
+            <input type="text" id="book_id" name="book_id">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title">
+            <label for="status">Status:</label>
+            <input type="text" id="status" name="status">
+            <label for="rating">Rating:</label>
+            <input type="text" id="rating" name="rating">
+            <button type="submit">Add Book</button>
+        </form>
+    </div>
 </body>
 </html>
-

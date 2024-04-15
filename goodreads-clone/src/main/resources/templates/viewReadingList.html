@@ -6,10 +6,12 @@
     <title>Reading List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fascinate&family=Goldman:wght@400;700&family=Michroma&family=Orbitron:wght@400;600;800;900&family=Zen+Dots&display=swap">
-    <!--<style>
+    <style>
         body {
             font-family: 'Michroma', sans-serif;
             background-color: #f2d3e3;
+            margin: 0;
+            padding: 0;
         }
         .container {
             margin-top: 50px;
@@ -17,13 +19,15 @@
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            position: relative; /* Added for positioning the close button */
+            position: relative; 
         }
         h2 {
             color: #333333;
+            margin-bottom: 20px;
         }
         p {
             color: #666666;
+            margin-bottom: 20px;
         }
         .close-button {
             position: absolute;
@@ -31,8 +35,8 @@
             right: 15px;
             width: 30px;
             height: 30px;
-            background-color: #c4739e; /* Changed button color */
-            color: #fff; /* Changed text color */
+            background-color: #c4739e;
+            color: #fff;
             border: none;
             border-radius: 50%;
             font-size: 18px;
@@ -41,36 +45,69 @@
             justify-content: center;
             align-items: center;
         }
-    </style>-->
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #c82333;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <span class="close-button" th:onclick="|window.location.href='/api/goodreads/dashboard'|">X</span> <!-- Added close button -->
+        <span class="close-button" th:onclick="|window.location.href='/api/goodreads/dashboard'|">X</span>
         <h2 th:text="'Reading List'">Reading List</h2>
         <p th:text="'This is your reading list. You can add and manage books here.'">This is your reading list. You can add and manage books here.</p>
-        <!-- Add your reading list content here -->
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Rating</th>
+            </tr>
+            <tr th:each="book : ${readingList}">
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.status}"></td>
+                <td th:text="${book.rating}"></td>
+            </tr>
+        </table>
+        <a th:href="@{/api/goodreads/addBook/{readingListId}(readingListId=${readingListId})}">Add Book</a>
+        <form th:action="@{/api/goodreads/deleteBook/{readingListId}(readingListId=${readingListId})}" method="post">
+            <input type="hidden" name="readingListId" th:value="${readingListId}" />
+            <input type="hidden" name="bookId" th:value="${bookId}" />
+            <button type="submit">Delete</button>
+        </form>
     </div>
-    <table>
-        <tr>
-            <!-- <th>BookID</th> -->
-            <th>Title</th>
-            <th>Status</th>
-            <th>Rating</th>
-        </tr>
-        <tr th:each="book : ${readingList}">
-            <!-- <td th:text="${book.book_id}"></td> -->
-            <td th:text="${book.title}"></td>
-            <td th:text="${book.status}"></td>
-            <td th:text="${book.rating}"></td>
-        </tr>
-    </table>
-    
-    <a th:href="@{/api/goodreads/addBook/{readingListId}(readingListId=${readingListId})}">Add Book</a>
-
-    <form th:action="@{/api/goodreads/deleteBook/{readingListId}(readingListId=${readingListId})}" method="post">
-        <input type="hidden" name="readingListId" th:value="${readingListId}" />
-        <input type="hidden" name="bookId" th:value="${bookId}" />
-        <button type="submit">Delete</button>
-    </form>
 </body>
 </html>
