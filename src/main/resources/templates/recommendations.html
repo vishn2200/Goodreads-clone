@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommendations</title>
+</head>
+<body>
+    <h1>Book Recommendations</h1>
+    <ul>
+        <li th:each="book : ${recommendations}">
+            <h3 th:text="${book.name}"></h3>
+            <p>Author: <span th:text="${book.author}"></span></p>
+            <p>Genre: <span th:text="${book.genre}"></span></p>
+            <p>Rating: <span th:text="${book.rating}"></span></p>
+            <p>Summary: <span th:text="${book.summary}"></span></p>
+        </li>
+    </ul>
+</body>
+</html>

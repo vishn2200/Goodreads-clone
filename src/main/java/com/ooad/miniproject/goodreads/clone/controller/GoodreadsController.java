@@ -15,6 +15,7 @@ import com.ooad.miniproject.goodreads.clone.service.BookService;
 import com.ooad.miniproject.goodreads.clone.entity.ReadingStatus;
 import com.ooad.miniproject.goodreads.clone.entity.ReadingListBook;
 import com.ooad.miniproject.goodreads.clone.service.ReadingListService;
+import com.ooad.miniproject.goodreads.clone.recommendation.RecommendationContext;
 
 import java.util.*;
 
@@ -26,13 +27,15 @@ public class GoodreadsController {
     private final BookClubService bookClubService;
     private final BookService bookService;
     private final ReadingListService readingListService;
+    private final RecommendationContext recommendationContext;
     private boolean authenticated = false; // Initialize as false
 
-    public GoodreadsController(UserService userService, BookClubService bookClubService, BookService bookService, ReadingListService readingListService) {
+    public GoodreadsController(UserService userService, BookClubService bookClubService, BookService bookService, ReadingListService readingListService, RecommendationContext recommendationContext) {
         this.userService = userService;
         this.bookClubService = bookClubService;
         this.bookService = bookService;
         this.readingListService = readingListService;
+        this.recommendationContext = recommendationContext;
 
     }
 
@@ -214,7 +217,20 @@ public class GoodreadsController {
         return "redirect:/api/goodreads/reading-list"; // Redirect back to the reading list page after updating the rating
     }
 */
-    
+@GetMapping("/recommendations")
+public String showRecommendationForm(Model model) {
+    model.addAttribute("recommendationType", RecommendationContext.RecommendationType.values());
+    return "recommendationForm"; // Return the HTML template for the recommendation form
+}
+
+@PostMapping("/recommendationsResults")
+public String getRecommendations(@RequestParam("input") String input,
+                                 @RequestParam("recommendationType") RecommendationContext.RecommendationType recommendationType,
+                                 Model model) {
+    List<Book> recommendations = recommendationContext.getRecommendations(input, recommendationType);
+    model.addAttribute("recommendations", recommendations);
+    return "recommendations"; // Return the HTML template for displaying recommendations
+}   
 
 
 }

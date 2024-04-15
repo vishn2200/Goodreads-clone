@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommendations</title>
+</head>
+<body>
+    <h1>Book Recommendations</h1>
+    <form th:action="@{/api/goodreads/recommendationsResults}" method="post">
+        <label for="input">Enter genre or author:</label>
+        <input type="text" id="input" name="input" required>
+        <br>
+        <label for="recommendationType">Recommendation Type:</label>
+        <select id="recommendationType" name="recommendationType" required>
+            <option th:each="type : ${recommendationType}" th:value="${type}" th:text="${type}"></option>
+        </select>
+        <br>
+        <button type="submit">Get Recommendations</button>
+    </form>
+</body>
+</html>

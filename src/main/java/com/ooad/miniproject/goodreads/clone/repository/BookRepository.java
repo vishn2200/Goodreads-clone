@@ -41,5 +41,10 @@ public class BookRepository {
         return jdbcTemplate.query(sql, bookRowMapper);
     }
 
+    public List<Book> getAllBooks() {
+        String sql = "SELECT * FROM books";
+        return jdbcTemplate.query(sql, bookRowMapper);
+    }
+    
     // Other CRUD operations
 }
