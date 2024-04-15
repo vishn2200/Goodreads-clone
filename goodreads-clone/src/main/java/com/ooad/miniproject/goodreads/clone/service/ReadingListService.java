@@ -27,8 +27,8 @@ public class ReadingListService {
         readingListRepository.deleteFromReadingList(readingListId, title);
     }
 
-    public void setBookStatusAndRating(Long readingListId, Long bookId, ReadingStatus status, Double rating) {
-        readingListRepository.setBookStatusAndRating(readingListId, bookId, status, rating);
+    public void setBookStatusAndRating(Long readingListId, String title, ReadingStatus status, Double rating) {
+        readingListRepository.setBookStatusAndRating(readingListId, title, status, rating);
     }
 
     public Long getCurrentUserReadingListId(Long userId) {

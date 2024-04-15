@@ -54,9 +54,9 @@ public class ReadingListRepository {
     }
 
     
-    public void setBookStatusAndRating(Long readingListId, Long bookId, ReadingStatus status, Double rating) {
-        String sql = "UPDATE reading_list_book SET status = ?, rating = ? WHERE reading_list_id = ? AND book_id = ?";
-        jdbcTemplate.update(sql, status.toString(), rating, readingListId, bookId);
+    public void setBookStatusAndRating(Long readingListId, String title, ReadingStatus status, Double rating) {
+        String sql = "UPDATE reading_list_book SET status = ?, rating = ? WHERE reading_list_id = ? AND title = ?";
+        jdbcTemplate.update(sql, status.toString(), rating, readingListId, title);
     }
 
     // Method to get the reading list ID for the current user

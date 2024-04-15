@@ -1,8 +1,6 @@
 package com.ooad.miniproject.goodreads.clone.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
-import java.security.Principal;
-import javax.servlet.http.HttpServletRequest;
 
 
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +12,6 @@ import com.ooad.miniproject.goodreads.clone.entity.BookClub;
 import com.ooad.miniproject.goodreads.clone.service.BookClubService;
 import com.ooad.miniproject.goodreads.clone.entity.Book;
 import com.ooad.miniproject.goodreads.clone.service.BookService;
-import com.ooad.miniproject.goodreads.clone.entity.ReadingList;
 import com.ooad.miniproject.goodreads.clone.entity.ReadingStatus;
 import com.ooad.miniproject.goodreads.clone.entity.ReadingListBook;
 import com.ooad.miniproject.goodreads.clone.service.ReadingListService;
@@ -192,16 +189,22 @@ public class GoodreadsController {
         readingListService.deleteFromReadingList(readingListId, title);
         return "redirect:/api/goodreads/dashboard"; // Redirect back to the reading list page
     }
-/*
-    @PostMapping("/update-book-status")
-    public String updateBookStatus(@RequestParam Long bookId, @RequestParam ReadingStatus status, Principal principal) {
-        // Assuming you have a method in ReadingListService to update the status of a book in the reading list
-        String username = principal.getName();
-        Long readingListId = readingListService.getCurrentUserReadingListId(username);
-        readingListService.setBookStatusAndRating(readingListId, bookId, status, null); // Pass null for rating as it is not being updated
-        return "redirect:/api/goodreads/reading-list"; // Redirect back to the reading list page after updating the status
+
+    @GetMapping("/updateBook/{readingListId}")
+    public String showUpdateBookForm(Model model, @PathVariable("readingListId") Long readingListId) {
+        model.addAttribute("readingListId", readingListId);
+        return "updateStatusRating"; // Return the HTML template for adding a book
     }
 
+    @PostMapping("/updateBookSuccess/{readingListId}")
+    public String updateStatusReadingList(@PathVariable("readingListId") Long readingListId, 
+                                            @RequestParam("title") String title,
+                                            @RequestParam("status") ReadingStatus status, 
+                                            @RequestParam("rating") Double rating) {
+        readingListService.setBookStatusAndRating(readingListId, title, status, rating);
+        return "redirect:/api/goodreads/dashboard"; // Redirect back to the reading list page
+    }
+/*
     @PostMapping("/update-book-rating")
     public String updateBookRating(@RequestParam Long bookId, @RequestParam Double rating, Principal principal) {
         // Assuming you have a method in ReadingListService to update the rating of a book in the reading list

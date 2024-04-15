@@ -108,6 +108,11 @@
             <input type="hidden" name="bookId" th:value="${bookId}" />
             <button type="submit">Delete</button>
         </form>
+        <form th:action="@{/api/goodreads/updateBook/{readingListId}(readingListId=${readingListId})}" method="post">
+            <input type="hidden" name="readingListId" th:value="${readingListId}" />
+            <input type="hidden" name="bookId" th:value="${bookId}" />
+            <button type="submit">Update Book</button>
+        </form>
     </div>
 </body>
 </html>
